@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useReveal, useLineReveal, useCountUp, gsap, ScrollTrigger } from '../hooks/useGsap'
+import { useReveal, useLineReveal, useCountUp, useGhostParallax, gsap, ScrollTrigger } from '../hooks/useGsap'
 import rentImg1 from '../assets/foto/foto-5.webp'
 import rentImg2 from '../assets/foto/foto-13.webp'
 import rentImg3 from '../assets/foto/foto-7.webp'
@@ -23,6 +23,7 @@ export default function FleetSection() {
   const revealRef = useReveal('.reveal-up')
   const lineRef = useLineReveal('.reveal-line')
   const countRef = useCountUp('.count-up')
+  const ghostRef = useGhostParallax('.ghost-text')
   const stripRef = useRef(null)
   const rentSectionRef = useRef(null)
 
@@ -31,7 +32,7 @@ export default function FleetSection() {
     const strip = stripRef.current
     const ctx = gsap.context(() => {
       gsap.to(strip, {
-        yPercent: -50,
+        xPercent: -50,
         ease: 'none',
         scrollTrigger: {
           trigger: rentSectionRef.current,
@@ -45,8 +46,11 @@ export default function FleetSection() {
   }, [])
 
   return (
-    <section id="fleet" ref={(el) => { revealRef.current = el; lineRef.current = el; countRef.current = el }} style={{ background: 'var(--color-bg-elevated)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
+    <section id="fleet" ref={(el) => { revealRef.current = el; lineRef.current = el; countRef.current = el; ghostRef.current = el }} style={{ background: 'var(--color-bg-elevated)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
       <div className="relative" style={{ padding: '0 var(--page-margin)' }}>
+
+        {/* Ghost text */}
+        <div className="ghost-text" style={{ top: '-5%', left: '-8%' }}>FLEET</div>
 
         {/* Background number */}
         <div className="bg-number" style={{ top: '-5%', right: '0' }}>10</div>
@@ -134,68 +138,66 @@ export default function FleetSection() {
           </h3>
         </div>
 
-        {/* Rent section — editorial split */}
-        <div ref={rentSectionRef} className="grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 'var(--grid-gap)', alignItems: 'start' }}>
+        {/* Rent section — text + horizontal carousel below */}
+        <div ref={rentSectionRef}>
 
-          {/* Left: Rent text */}
-          <div style={{ gridColumn: '1 / span 5' }}>
-            <div className="reveal-up">
-              <p style={{ color: 'var(--color-white-60)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
-                Non possiedi ancora una supercar? Nessun problema.
-                Grazie alla nostra partnership con i migliori servizi di noleggio,
-                puoi partecipare ai nostri eventi guidando la vettura dei tuoi sogni.
-              </p>
+          {/* Rent text */}
+          <div className="reveal-up" style={{ maxWidth: '700px', marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
+            <p style={{ color: 'var(--color-white-60)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+              Non possiedi ancora una supercar? Nessun problema.
+              Grazie alla nostra partnership con i migliori servizi di noleggio,
+              puoi partecipare ai nostri eventi guidando la vettura dei tuoi sogni.
+            </p>
 
-              <div className="reveal-up space-y-3" style={{ marginBottom: '2rem' }}>
-                {[
-                  'Flotta di supercar premium',
-                  'Assicurazione completa inclusa',
-                  'Consegna al punto di partenza',
-                  'Assistenza dedicata',
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <span style={{ width: '20px', height: '1px', background: 'var(--color-red)' }} />
-                    <span style={{ fontSize: '1.1rem', color: 'var(--color-white-60)' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <a href="#contatti" className="btn-editorial reveal-up">
-                Richiedi informazioni
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-              </a>
-            </div>
-          </div>
-
-          {/* Right: Rent images — vertical scrolling strip */}
-          <div style={{ gridColumn: '7 / -1', height: 'clamp(350px, 50vh, 500px)', overflow: 'hidden', position: 'relative' }}>
-            {/* Top/bottom fade masks */}
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '60px', background: 'linear-gradient(to bottom, var(--color-bg-elevated), transparent)', zIndex: 2, pointerEvents: 'none' }} />
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '60px', background: 'linear-gradient(to top, var(--color-bg-elevated), transparent)', zIndex: 2, pointerEvents: 'none' }} />
-
-            <div ref={stripRef} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
-              {/* Double the images for seamless scrolling */}
-              {[...rentImages, ...rentImages].map((img, i) => (
-                <div
-                  key={i}
-                  className="group relative overflow-hidden"
-                >
-                  <img
-                    src={img}
-                    alt="Supercar noleggio"
-                    className="transition-transform duration-700 group-hover:scale-110"
-                    style={{
-                      width: '100%',
-                      height: 'clamp(140px, 20vh, 200px)',
-                      objectFit: 'cover',
-                      filter: 'brightness(0.6) contrast(1.1)',
-                    }}
-                  />
-                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0.15)', transition: 'background 0.3s' }}
-                       className="group-hover:!bg-transparent" />
+            <div className="reveal-up space-y-3" style={{ marginBottom: '2rem' }}>
+              {[
+                'Flotta di supercar premium',
+                'Assicurazione completa inclusa',
+                'Consegna al punto di partenza',
+                'Assistenza dedicata',
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <span style={{ width: '20px', height: '1px', background: 'var(--color-red)' }} />
+                  <span style={{ fontSize: '1.1rem', color: 'var(--color-white-60)' }}>{item}</span>
                 </div>
               ))}
             </div>
+
+            <a href="#contatti" className="btn-editorial reveal-up">
+              Richiedi informazioni
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+            </a>
+          </div>
+        </div>
+
+        {/* Horizontal scrolling carousel — full width */}
+        <div style={{ overflow: 'hidden', position: 'relative', marginLeft: 'calc(var(--page-margin) * -1)', marginRight: 'calc(var(--page-margin) * -1)' }}>
+          {/* Left/right fade masks */}
+          <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: '80px', background: 'linear-gradient(to right, var(--color-bg-elevated), transparent)', zIndex: 2, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: '80px', background: 'linear-gradient(to left, var(--color-bg-elevated), transparent)', zIndex: 2, pointerEvents: 'none' }} />
+
+          <div ref={stripRef} style={{ display: 'flex', gap: 'clamp(8px, 1.5vw, 16px)', width: 'max-content' }}>
+            {[...rentImages, ...rentImages].map((img, i) => (
+              <div
+                key={i}
+                className="group relative overflow-hidden"
+                style={{ flex: '0 0 auto', width: 'clamp(280px, 30vw, 420px)' }}
+              >
+                <img
+                  src={img}
+                  alt="Supercar noleggio"
+                  className="transition-transform duration-700 group-hover:scale-105"
+                  style={{
+                    width: '100%',
+                    height: 'clamp(200px, 30vh, 320px)',
+                    objectFit: 'cover',
+                    filter: 'brightness(0.65) contrast(1.1)',
+                  }}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.1)', transition: 'background 0.3s' }}
+                     className="group-hover:!bg-transparent" />
+              </div>
+            ))}
           </div>
         </div>
 

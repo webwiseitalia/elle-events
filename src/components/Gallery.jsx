@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useReveal, useLineReveal } from '../hooks/useGsap'
+import { useReveal, useLineReveal, useGhostParallax } from '../hooks/useGsap'
 
 import img1 from '../assets/foto/foto-4.webp'
 import img2 from '../assets/foto/foto-6.webp'
@@ -33,9 +33,10 @@ export default function Gallery() {
   const [lightbox, setLightbox] = useState(null)
   const revealRef = useReveal('.reveal-up')
   const lineRef = useLineReveal('.reveal-line')
+  const ghostRef = useGhostParallax('.ghost-text')
 
   return (
-    <section id="gallery" ref={(el) => { revealRef.current = el; lineRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
+    <section id="gallery" ref={(el) => { revealRef.current = el; lineRef.current = el; ghostRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
       <div className="relative" style={{ padding: '0 var(--page-margin)' }}>
 
         {/* Ghost text */}

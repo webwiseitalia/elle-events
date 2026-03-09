@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGhostParallax } from '../hooks/useGsap'
 import logo from '../assets/logoelleevents.webp'
 import heroBg from '../assets/macchine-rent/macchine-rent-6.webp'
 
@@ -9,27 +10,37 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Hero() {
   const sectionRef = useRef(null)
   const imgRef = useRef(null)
+  const ghostRef = useGhostParallax('.ghost-text')
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Cinematic zoom-out reveal on the hero image
+      gsap.fromTo(imgRef.current,
+        { scale: 1.35, filter: 'brightness(0.2) contrast(1.15)' },
+        { scale: 1.05, filter: 'brightness(0.5) contrast(1.15)', duration: 2.5, ease: 'power2.out' }
+      )
+
+      // Parallax on scroll
       gsap.to(imgRef.current, {
         y: 120, ease: 'none',
         scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom top', scrub: true },
       })
-      gsap.fromTo('.hero-reveal', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, stagger: 0.12, ease: 'power3.out', delay: 0.3 })
-      gsap.fromTo('.hero-line', { width: '0%' }, { width: '100%', duration: 1.5, ease: 'expo.inOut', delay: 0.8 })
+
+      // Content reveals with stagger
+      gsap.fromTo('.hero-reveal', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.4, stagger: 0.15, ease: 'power3.out', delay: 0.6 })
+      gsap.fromTo('.hero-line', { width: '0%' }, { width: '100%', duration: 1.8, ease: 'expo.inOut', delay: 1.2 })
     }, sectionRef)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden flex flex-col justify-end" style={{ background: 'var(--color-bg)' }}>
+    <section ref={(el) => { sectionRef.current = el; ghostRef.current = el }} className="relative min-h-screen overflow-hidden flex flex-col justify-end" style={{ background: 'var(--color-bg)' }}>
       <div className="ghost-text" style={{ top: '15%', right: '-5%' }}>ELLE</div>
 
       <div className="absolute inset-0 overflow-hidden">
         <img ref={imgRef} src={heroBg} alt="" className="w-full h-[120%] object-cover" style={{ transform: 'scale(1.05)', filter: 'brightness(0.5) contrast(1.15)' }} />
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(10,10,10,0.85) 70%, #0a0a0a 100%)' }} />
-        <div className="absolute bottom-0 left-0 right-0 h-[40%]" style={{ background: 'linear-gradient(to top, #0a0a0a, transparent)' }} />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(10,10,10,0.85) 70%, #000000 100%)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-[40%]" style={{ background: 'linear-gradient(to top, #000000, transparent)' }} />
       </div>
 
       <div className="relative z-10" style={{ padding: '0 var(--page-margin)', paddingBottom: 'clamp(3rem, 8vh, 6rem)' }}>

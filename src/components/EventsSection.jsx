@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useReveal, useLineReveal } from '../hooks/useGsap'
-import eventImg from '../assets/foto/foto-4.webp'
+import { useReveal, useLineReveal, useImageParallax, useGhostParallax } from '../hooks/useGsap'
+import eventImg from '../assets/prossimo evento/prossimo evento-2.webp'
 
 const nextEvent = {
   name: 'DREAMRIDE',
@@ -57,10 +57,15 @@ function formatDate(dateStr) {
 export default function EventsSection() {
   const revealRef = useReveal('.reveal-up')
   const lineRef = useLineReveal('.reveal-line')
+  const parallaxRef = useImageParallax('.parallax-img')
+  const ghostRef = useGhostParallax('.ghost-text')
 
   return (
-    <section id="eventi" ref={(el) => { revealRef.current = el; lineRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
-      <div style={{ padding: '0 var(--page-margin)' }}>
+    <section id="eventi" ref={(el) => { revealRef.current = el; lineRef.current = el; parallaxRef.current = el; ghostRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
+      <div className="relative" style={{ padding: '0 var(--page-margin)' }}>
+
+        {/* Ghost text */}
+        <div className="ghost-text" style={{ top: '-8%', right: '-5%' }}>EVENTS</div>
 
         {/* Section label */}
         <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)' }}>[ 02 — Prossimo Evento ]</div>
@@ -86,6 +91,7 @@ export default function EventsSection() {
                   objectFit: 'cover',
                   filter: 'brightness(0.75) contrast(1.1)',
                 }}
+                className="parallax-img"
               />
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 50%, rgba(10,10,10,0.5) 100%)' }} />
               <div style={{ position: 'absolute', bottom: 'clamp(0.75rem, 2vw, 1.5rem)', left: 'clamp(0.75rem, 2vw, 1.5rem)' }}>

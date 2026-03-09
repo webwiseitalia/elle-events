@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useReveal, useLineReveal } from '../hooks/useGsap'
+import { useReveal, useLineReveal, useGhostParallax } from '../hooks/useGsap'
 
 export default function Contact() {
   const [form, setForm] = useState({ nome: '', email: '', messaggio: '' })
   const [sent, setSent] = useState(false)
   const revealRef = useReveal('.reveal-up')
   const lineRef = useLineReveal('.reveal-line')
+  const ghostRef = useGhostParallax('.ghost-text')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -13,7 +14,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contatti" ref={(el) => { revealRef.current = el; lineRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
+    <section id="contatti" ref={(el) => { revealRef.current = el; lineRef.current = el; ghostRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
       <div className="relative" style={{ padding: '0 var(--page-margin)' }}>
 
         <div className="ghost-text" style={{ top: '-5%', right: '-8%' }}>CONTACT</div>

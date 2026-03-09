@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #0a0a0a;
-  --color-bg-elevated: #0a0a0a;
+  --color-bg: #000000;
+  --color-bg-elevated: #000000;
   --color-bg-card: #111111;
   --color-red: #C0202A;
   --color-red-dark: #8a1620;

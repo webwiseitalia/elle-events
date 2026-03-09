@@ -10,6 +10,7 @@ import Partners from './components/Partners'
 import Gallery from './components/Gallery'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Marquee from './components/Marquee'
 import EventsPage from './pages/EventsPage'
 import FleetPage from './pages/FleetPage'
 import CarPage from './pages/CarPage'
@@ -18,11 +19,14 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <Marquee text="ELLE EVENTS" separator="✦" />
       <About />
       <EventsSection />
+      <Marquee text="SUPERCAR SOCIETY" separator="—" speed={50} />
       <FleetSection />
       <Partners />
       <Gallery />
+      <Marquee text="UNCONVENTIONAL" separator="✦" speed={35} />
       <Contact />
     </>
   )

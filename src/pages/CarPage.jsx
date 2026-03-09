@@ -34,6 +34,7 @@ const carsData = {
     weight: '1.379 kg',
     desc: "La Huracán Tecnica rappresenta l'equilibrio perfetto tra prestazioni da pista e piacere di guida stradale. Il V10 aspirato da 640 CV, abbinato alla trazione posteriore, offre un'esperienza di guida pura e coinvolgente.",
     wireframe: wireHuracan,
+    wireframeVertical: true,
     photo: rentImg6,
   },
   '812-superfast': {
@@ -50,6 +51,7 @@ const carsData = {
     weight: '1.525 kg',
     desc: "La 812 Superfast è la GT V12 per eccellenza. Con il motore V12 aspirato più potente mai prodotto da Ferrari e lo scarico Novitec, ogni accelerata è un'esperienza sensoriale totale.",
     wireframe: wire812,
+    wireframeVertical: false,
     photo: rentImg2,
   },
   'urus-performante': {
@@ -66,6 +68,7 @@ const carsData = {
     weight: '2.150 kg',
     desc: "L'Urus Performante è il Super SUV nella sua forma più estrema. Con 666 CV, scarico Akrapovič e assetto ribassato, combina il comfort di un SUV con le prestazioni di una supercar.",
     wireframe: wireUrus,
+    wireframeVertical: false,
     photo: rentImg3,
   },
   'amg-gt-tiffany': {
@@ -82,6 +85,7 @@ const carsData = {
     weight: '1.615 kg',
     desc: "La AMG GT in edizione speciale \"Tiffany\" è una delle GT più raffinate del mondo. Il V8 biturbo da 585 CV regala una potenza brutale in un corpo elegantissimo.",
     wireframe: wireAmgGt,
+    wireframeVertical: true,
     photo: rentImg4,
   },
   'g63-grand-edition': {
@@ -98,6 +102,7 @@ const carsData = {
     weight: '2.560 kg',
     desc: "Il G63 AMG Grand Edition è un'icona senza tempo in versione limitata 1 su 1000. Il V8 biturbo da 585 CV in un corpo leggendario — lusso e potenza allo stato puro.",
     wireframe: wireG63,
+    wireframeVertical: false,
     photo: rentImg5,
   },
   'r8-v10-performance': {
@@ -114,6 +119,7 @@ const carsData = {
     weight: '1.680 kg',
     desc: "L'Audi R8 V10 Performance è la supercar di Ingolstadt nella sua forma definitiva. Il V10 aspirato condiviso con la Huracán, il sistema quattro e un design iconico la rendono unica.",
     wireframe: wireR8,
+    wireframeVertical: false,
     photo: rentImg1,
   },
   'rs3-2025': {
@@ -130,6 +136,7 @@ const carsData = {
     weight: '1.570 kg',
     desc: "La RS3 MY 2025 è la compatta più potente del segmento. Il leggendario 5 cilindri turbo da 400 CV con il suo sound inconfondibile — adrenalina concentrata in un formato compatto.",
     wireframe: wireRs3,
+    wireframeVertical: true,
     photo: rentImg1,
   },
 }
@@ -196,22 +203,26 @@ export default function CarPage() {
         </p>
       </div>
 
-      {/* Wireframe blueprint section */}
-      <div style={{ background: 'var(--color-bg-elevated)', padding: 'clamp(3rem, 6vw, 5rem) 0' }}>
+      {/* Wireframe blueprint section — full-width horizontal */}
+      <div style={{ background: 'var(--color-bg-elevated)', padding: 'clamp(3rem, 6vw, 5rem) 0', overflow: 'hidden' }}>
         <div style={{ padding: '0 var(--page-margin)' }}>
           <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)' }}>Blueprint</div>
+        </div>
 
-          <div className="reveal-up" style={{ position: 'relative', marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
-            <img
-              src={car.wireframe}
-              alt={`${car.brand} ${car.model} wireframe blueprint`}
-              style={{
-                width: '100%',
-                maxHeight: '70vh',
-                objectFit: 'contain',
-              }}
-            />
-          </div>
+        <div className="reveal-up" style={{ position: 'relative', marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
+          <img
+            src={car.wireframe}
+            alt={`${car.brand} ${car.model} wireframe blueprint`}
+            style={{
+              width: '100%',
+              maxHeight: car.wireframeVertical ? 'none' : '85vh',
+              objectFit: 'contain',
+              ...(car.wireframeVertical
+                ? { transform: 'rotate(90deg) scale(1.15)', transformOrigin: 'center center', margin: 'clamp(-2rem, -4vw, -4rem) 0' }
+                : { transform: 'scale(1.05)', transformOrigin: 'center center' }
+              ),
+            }}
+          />
         </div>
       </div>
 

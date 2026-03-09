@@ -69,6 +69,7 @@ export default function About() {
                 <img
                   src={aboutImg}
                   alt="Elle Events experience"
+                  className="parallax-img"
                   style={{ width: '100%', height: 'clamp(400px, 55vh, 600px)', objectFit: 'cover', filter: 'brightness(0.7) contrast(1.1)' }}
                 />
               </div>
