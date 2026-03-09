@@ -29,25 +29,26 @@ export default function Gallery() {
   const lineRef = useLineReveal('.reveal-line')
 
   return (
-    <section id="gallery" ref={(el) => { revealRef.current = el; lineRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(6rem, 14vh, 10rem) 0' }}>
+    <section id="gallery" ref={(el) => { revealRef.current = el; lineRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
       <div className="relative" style={{ padding: '0 var(--page-margin)' }}>
 
         {/* Ghost text */}
         <div className="ghost-text" style={{ bottom: '10%', left: '-5%' }}>GALLERY</div>
 
-        {/* Header */}
-        <div className="flex flex-wrap items-end justify-between gap-6" style={{ marginBottom: 'clamp(3rem, 6vw, 5rem)' }}>
-          <div>
-            <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)' }}>[ 04 — Gallery ]</div>
-            <h2 className="reveal-up t-display" style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)' }}>
-              Momenti <em className="t-display-italic" style={{ color: 'var(--color-red)' }}>esclusivi</em>
-            </h2>
-          </div>
+        {/* Section label */}
+        <div className="reveal-up t-label mb-4" style={{ color: 'var(--color-red)' }}>[ 04 — Gallery ]</div>
+
+        {/* Giant overlapping title */}
+        <div className="flex flex-wrap items-end justify-between gap-4" style={{ position: 'relative', zIndex: 2, marginBottom: '-3vw' }}>
+          <h2 className="reveal-up t-display" style={{ fontSize: 'clamp(3.5rem, 8vw, 8rem)', lineHeight: '0.9' }}>
+            Momenti <em className="t-display-italic" style={{ color: 'var(--color-red)' }}>esclusivi</em>
+          </h2>
           <a
             href="https://www.instagram.com/_elle_events_/"
             target="_blank"
             rel="noopener noreferrer"
             className="reveal-up btn-editorial"
+            style={{ marginBottom: '1rem' }}
           >
             @_elle_events_
             <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
@@ -56,62 +57,45 @@ export default function Gallery() {
           </a>
         </div>
 
-        <div className="reveal-line rule" style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)' }} />
-
-        {/* Editorial masonry — asymmetric grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '4px' }}>
-          {allImages.map((img, i) => {
-            // Create asymmetric spans
-            const spans = [
-              { col: '1 / span 5', row: 'span 2' },   // 0: large left
-              { col: '6 / span 4', row: 'span 1' },    // 1: medium
-              { col: '10 / span 3', row: 'span 1' },   // 2: small
-              { col: '6 / span 3', row: 'span 1' },    // 3: small
-              { col: '9 / span 4', row: 'span 1' },    // 4: medium
-              { col: '1 / span 4', row: 'span 1' },    // 5: medium
-              { col: '5 / span 3', row: 'span 1' },    // 6: small
-              { col: '8 / span 5', row: 'span 2' },    // 7: large right
-              { col: '1 / span 7', row: 'span 1' },    // 8: wide bottom
-            ]
-            const s = spans[i] || { col: 'span 4', row: 'span 1' }
-
-            return (
-              <div
-                key={i}
-                className="reveal-up group relative overflow-hidden cursor-pointer"
-                style={{
-                  gridColumn: s.col,
-                  gridRow: s.row,
-                  height: s.row === 'span 2' ? 'clamp(300px, 45vh, 500px)' : 'clamp(150px, 22vh, 250px)',
-                }}
-                onClick={() => setLightbox(img)}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="transition-transform duration-700 group-hover:scale-105"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }}
-                />
-                <div
-                  style={{
-                    position: 'absolute', inset: 0,
-                    background: 'rgba(10,10,10,0)',
-                    transition: 'background 0.4s',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}
-                  className="group-hover:!bg-[rgba(10,10,10,0.4)]"
-                >
-                  <svg
-                    width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}
-                    style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }}
-                    className="group-hover:!opacity-100"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-                  </svg>
-                </div>
+        {/* Gallery grid — 3 rows, alternating layout */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
+          {/* Row 1: large left + 2 stacked right */}
+          <div className="row-span-2 group relative overflow-hidden cursor-pointer" style={{ height: 'clamp(300px, 45vh, 500px)' }} onClick={() => setLightbox(allImages[0])}>
+            <img src={allImages[0].src} alt={allImages[0].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+            </div>
+          </div>
+          {[1, 2, 3, 4].map((idx) => (
+            <div key={idx} className="group relative overflow-hidden cursor-pointer" onClick={() => setLightbox(allImages[idx])}>
+              <img src={allImages[idx].src} alt={allImages[idx].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
               </div>
-            )
-          })}
+            </div>
+          ))}
+
+          {/* Row 3: 2 stacked left + large right */}
+          {[5, 6].map((idx) => (
+            <div key={idx} className="group relative overflow-hidden cursor-pointer" onClick={() => setLightbox(allImages[idx])}>
+              <img src={allImages[idx].src} alt={allImages[idx].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+          ))}
+          <div className="row-span-2 group relative overflow-hidden cursor-pointer" style={{ height: 'clamp(300px, 45vh, 500px)' }} onClick={() => setLightbox(allImages[7])}>
+            <img src={allImages[7].src} alt={allImages[7].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+            </div>
+          </div>
+          <div className="col-span-2 group relative overflow-hidden cursor-pointer" onClick={() => setLightbox(allImages[8])}>
+            <img src={allImages[8].src} alt={allImages[8].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+            </div>
+          </div>
         </div>
       </div>
 

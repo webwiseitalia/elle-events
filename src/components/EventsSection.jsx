@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useReveal, useLineReveal } from '../hooks/useGsap'
-import eventImg from '../assets/prossimo evento/prossimo evento-2.webp'
+import eventImg from '../assets/foto/foto-4.webp'
 
 const nextEvent = {
   name: 'DREAMRIDE',
@@ -32,7 +32,7 @@ function Countdown({ targetDate }) {
   }, [targetDate])
 
   return (
-    <div className="flex gap-6 md:gap-8">
+    <div className="flex gap-5 md:gap-8">
       {[
         { val: time.days, label: 'Giorni' },
         { val: time.hours, label: 'Ore' },
@@ -40,10 +40,10 @@ function Countdown({ targetDate }) {
         { val: time.secs, label: 'Sec' },
       ].map((item) => (
         <div key={item.label}>
-          <span className="t-data block" style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', color: 'var(--color-white)', lineHeight: '0.85' }}>
+          <span className="t-data block" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', color: 'var(--color-white)', lineHeight: '0.85' }}>
             {String(item.val).padStart(2, '0')}
           </span>
-          <span className="t-label" style={{ fontSize: '0.4rem', marginTop: '0.4rem', display: 'block' }}>{item.label}</span>
+          <span className="t-label" style={{ marginTop: '0.4rem', display: 'block' }}>{item.label}</span>
         </div>
       ))}
     </div>
@@ -59,18 +59,25 @@ export default function EventsSection() {
   const lineRef = useLineReveal('.reveal-line')
 
   return (
-    <section id="eventi" ref={(el) => { revealRef.current = el; lineRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(6rem, 14vh, 10rem) 0' }}>
+    <section id="eventi" ref={(el) => { revealRef.current = el; lineRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
       <div style={{ padding: '0 var(--page-margin)' }}>
 
         {/* Section label */}
-        <div className="reveal-up t-label mb-12" style={{ color: 'var(--color-red)' }}>[ 02 — Prossimo Evento ]</div>
+        <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)' }}>[ 02 — Prossimo Evento ]</div>
+
+        {/* Giant overlapping title */}
+        <div className="reveal-up" style={{ position: 'relative', zIndex: 2, marginBottom: '-4vw' }}>
+          <h2 className="t-display" style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.85' }}>
+            {nextEvent.name}
+          </h2>
+        </div>
 
         {/* Grid: image left, info right */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 'var(--grid-gap)', alignItems: 'center' }}>
+        <div className="grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 'var(--grid-gap)', alignItems: 'start' }}>
 
-          {/* Left: Instagram-sized image (4:5 aspect ratio) */}
-          <div style={{ gridColumn: '1 / span 6' }} className="col-span-12 lg:col-span-6">
-            <div className="reveal-up relative overflow-hidden" style={{ aspectRatio: '4 / 5' }}>
+          {/* Left: Image — 4:5 ratio, span 6 cols, offset right */}
+          <div style={{ gridColumn: '2 / span 6', position: 'relative', zIndex: 1 }}>
+            <div className="reveal-up relative overflow-hidden" style={{ aspectRatio: '4 / 5', maxHeight: '580px' }}>
               <img
                 src={eventImg}
                 alt={nextEvent.name}
@@ -80,51 +87,45 @@ export default function EventsSection() {
                   filter: 'brightness(0.75) contrast(1.1)',
                 }}
               />
-              {/* Subtle vignette */}
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 50%, rgba(10,10,10,0.5) 100%)' }} />
-              {/* Event name watermark on image */}
-              <div style={{ position: 'absolute', bottom: 'clamp(1rem, 3vw, 2rem)', left: 'clamp(1rem, 3vw, 2rem)' }}>
-                <span className="t-label" style={{ fontSize: '0.45rem', color: 'var(--color-white-60)' }}>Flagship Event</span>
+              <div style={{ position: 'absolute', bottom: 'clamp(0.75rem, 2vw, 1.5rem)', left: 'clamp(0.75rem, 2vw, 1.5rem)' }}>
+                <span className="t-label" style={{ color: 'var(--color-white-60)' }}>Flagship Event</span>
               </div>
             </div>
           </div>
 
           {/* Right: Event info */}
-          <div style={{ gridColumn: '8 / -1' }} className="col-span-12 lg:col-span-5 lg:col-start-8">
+          <div style={{ gridColumn: '9 / -1' }}>
 
-            <span className="reveal-up t-label" style={{ fontSize: '0.5rem', display: 'block', marginBottom: '1.5rem' }}>{nextEvent.tagline}</span>
+            <span className="reveal-up t-label" style={{ display: 'block', marginBottom: '0.75rem' }}>{nextEvent.tagline}</span>
 
-            <h2 className="reveal-up t-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', marginBottom: '1.5rem' }}>
-              {nextEvent.name}
-            </h2>
+            <div className="reveal-line rule" style={{ maxWidth: '80px', marginBottom: '1.2rem' }} />
 
-            <div className="reveal-line rule" style={{ maxWidth: '80px', marginBottom: '1.5rem' }} />
-
-            <p className="reveal-up" style={{ color: 'var(--color-white-60)', fontSize: '0.8rem', lineHeight: '2', marginBottom: '2rem' }}>
+            <p className="reveal-up" style={{ color: 'var(--color-white-60)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
               {nextEvent.desc}
             </p>
 
             {/* Event details */}
-            <div className="reveal-up" style={{ marginBottom: '2.5rem' }}>
+            <div className="reveal-up" style={{ marginBottom: '1.5rem' }}>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <span style={{ width: '16px', height: '1px', background: 'var(--color-red)' }} />
-                  <span style={{ fontSize: '0.75rem', color: 'var(--color-white-60)' }}>{formatDate(nextEvent.date)}</span>
+                  <span style={{ width: '20px', height: '1px', background: 'var(--color-red)' }} />
+                  <span style={{ fontSize: '1.1rem', color: 'var(--color-white-60)' }}>{formatDate(nextEvent.date)}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span style={{ width: '16px', height: '1px', background: 'var(--color-red)' }} />
-                  <span style={{ fontSize: '0.75rem', color: 'var(--color-white-60)' }}>{nextEvent.location}</span>
+                  <span style={{ width: '20px', height: '1px', background: 'var(--color-red)' }} />
+                  <span style={{ fontSize: '1.1rem', color: 'var(--color-white-60)' }}>{nextEvent.location}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span style={{ width: '16px', height: '1px', background: 'var(--color-red)' }} />
-                  <span className="t-label" style={{ color: 'var(--color-red)', fontSize: '0.5rem' }}>{nextEvent.spots} posti disponibili</span>
+                  <span style={{ width: '20px', height: '1px', background: 'var(--color-red)' }} />
+                  <span className="t-label" style={{ color: 'var(--color-red)' }}>{nextEvent.spots} posti disponibili</span>
                 </div>
               </div>
             </div>
 
             {/* Countdown */}
-            <div className="reveal-up" style={{ marginBottom: '2.5rem' }}>
-              <span className="t-label" style={{ fontSize: '0.4rem', display: 'block', marginBottom: '1rem', color: 'var(--color-red)' }}>Countdown</span>
+            <div className="reveal-up" style={{ marginBottom: '2rem' }}>
+              <span className="t-label" style={{ display: 'block', marginBottom: '0.75rem', color: 'var(--color-red)' }}>Countdown</span>
               <Countdown targetDate={nextEvent.date} />
             </div>
 

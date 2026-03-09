@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import logo from '../assets/logoelleevents.webp'
-import heroBg from '../assets/macchine-rent/macchine-rent-5.webp'
+import heroBg from '../assets/macchine-rent/macchine-rent-6.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -37,7 +37,7 @@ export default function Hero() {
           <div className="hero-reveal">
             <img src={logo} alt="Elle Events" className="w-14 h-14 md:w-16 md:h-16 rounded-full" style={{ opacity: 0.9 }} />
           </div>
-          <div className="hero-reveal t-micro hidden md:block" style={{ fontSize: '0.55rem' }}>↓ [ Scroll ]</div>
+          <div className="hero-reveal t-micro hidden md:block">↓ [ Scroll ]</div>
         </div>
 
         <div>
@@ -48,7 +48,7 @@ export default function Hero() {
           </h1>
           <div className="hero-line rule" style={{ marginBottom: '1.5rem' }} />
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <p className="hero-reveal" style={{ maxWidth: '380px', color: 'var(--color-white-60)', fontSize: '0.8rem', lineHeight: '1.8' }}>
+            <p className="hero-reveal" style={{ maxWidth: '520px', color: 'var(--color-white-60)', fontSize: '1.2rem', lineHeight: '1.8' }}>
               Where the dress code is a supercar. Esperienze esclusive dove il lusso si fonde con l'adrenalina pura.
             </p>
             <div className="hero-reveal">

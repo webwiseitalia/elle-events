@@ -12,6 +12,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import EventsPage from './pages/EventsPage'
 import FleetPage from './pages/FleetPage'
+import CarPage from './pages/CarPage'
 
 function HomePage() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/eventi" element={<EventsPage />} />
           <Route path="/fleet" element={<FleetPage />} />
+          <Route path="/fleet/:slug" element={<CarPage />} />
         </Routes>
         <Footer />
       </div>
