@@ -1,26 +1,32 @@
 import { useState } from 'react'
 import { useReveal, useLineReveal } from '../hooks/useGsap'
 
-import img1 from '../assets/macchine-rent/macchine-rent-1.webp'
-import img2 from '../assets/macchine-rent/macchine-rent-2.webp'
-import img3 from '../assets/macchine-rent/macchine-rent-3.webp'
-import img4 from '../assets/macchine-rent/macchine-rent-4.webp'
-import img5 from '../assets/macchine-rent/macchine-rent-5.webp'
-import img6 from '../assets/macchine-rent/macchine-rent-6.webp'
-import img7 from '../assets/macchine-rent/macchine-rent-7.webp'
-import img8 from '../assets/macchine-rent/macchine-rent-8.webp'
-import img9 from '../assets/macchine-rent/macchine-rent-9.webp'
+import img1 from '../assets/foto/foto-4.webp'
+import img2 from '../assets/foto/foto-6.webp'
+import img3 from '../assets/foto/foto-3.webp'
+import img4 from '../assets/foto/foto-7.webp'
+import img5 from '../assets/foto/foto-11.webp'
+import img6 from '../assets/foto/foto-9.webp'
+import img7 from '../assets/foto/foto-10.webp'
+import img8 from '../assets/foto/foto-12.webp'
+import img9 from '../assets/foto/foto-8.webp'
+import img10 from '../assets/foto/foto-2.webp'
+import img11 from '../assets/foto/foto-14.webp'
+import img12 from '../assets/foto/foto-16.webp'
 
 const allImages = [
-  { src: img1, alt: 'Supercar Elle Events' },
-  { src: img2, alt: 'Tour supercar' },
-  { src: img3, alt: 'Tour supercar' },
-  { src: img4, alt: 'Supercar Elle Events' },
-  { src: img5, alt: 'Supercar Elle Events' },
-  { src: img6, alt: 'Tour supercar' },
-  { src: img7, alt: 'Supercar Elle Events' },
-  { src: img8, alt: 'Tour supercar' },
-  { src: img9, alt: 'Supercar Elle Events' },
+  { src: img1, alt: 'McLaren in piazza al tramonto' },
+  { src: img2, alt: 'Porsche GT3 RS tra le Alpi' },
+  { src: img3, alt: 'Convoy supercar in strada' },
+  { src: img4, alt: 'BMW e Porsche in curva di montagna' },
+  { src: img5, alt: 'Elle Events branded con AMG GT' },
+  { src: img6, alt: 'Supercar parcheggiate in piazza' },
+  { src: img7, alt: 'Mercedes AMG gialla in piazza' },
+  { src: img8, alt: 'Maserati bianca in piazza' },
+  { src: img9, alt: 'Porsche 911 frontale su strada' },
+  { src: img10, alt: 'Aperitivo con supercar' },
+  { src: img11, alt: 'Supercar parcheggiate di notte' },
+  { src: img12, alt: 'Supercar rosse di notte' },
 ]
 
 export default function Gallery() {
@@ -57,45 +63,33 @@ export default function Gallery() {
           </a>
         </div>
 
-        {/* Gallery grid — 3 rows, alternating layout */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
-          {/* Row 1: large left + 2 stacked right */}
-          <div className="row-span-2 group relative overflow-hidden cursor-pointer" style={{ height: 'clamp(300px, 45vh, 500px)' }} onClick={() => setLightbox(allImages[0])}>
-            <img src={allImages[0].src} alt={allImages[0].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-            </div>
-          </div>
-          {[1, 2, 3, 4].map((idx) => (
-            <div key={idx} className="group relative overflow-hidden cursor-pointer" onClick={() => setLightbox(allImages[idx])}>
-              <img src={allImages[idx].src} alt={allImages[idx].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+        {/* Gallery grid — asymmetric masonry */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', gridAutoRows: 'clamp(140px, 22vh, 240px)' }}>
+          {allImages.map((img, i) => {
+            const large = i === 0 || i === 8
+            return (
+              <div
+                key={i}
+                className={`group relative overflow-hidden cursor-pointer ${large ? 'row-span-2' : ''} ${i === 3 ? 'col-span-2' : ''}`}
+                onClick={() => setLightbox(img)}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="transition-transform duration-700 group-hover:scale-105"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }}
+                />
+                <div
+                  style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  className="group-hover:!bg-[rgba(10,10,10,0.4)]"
+                >
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </div>
               </div>
-            </div>
-          ))}
-
-          {/* Row 3: 2 stacked left + large right */}
-          {[5, 6].map((idx) => (
-            <div key={idx} className="group relative overflow-hidden cursor-pointer" onClick={() => setLightbox(allImages[idx])}>
-              <img src={allImages[idx].src} alt={allImages[idx].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-              </div>
-            </div>
-          ))}
-          <div className="row-span-2 group relative overflow-hidden cursor-pointer" style={{ height: 'clamp(300px, 45vh, 500px)' }} onClick={() => setLightbox(allImages[7])}>
-            <img src={allImages[7].src} alt={allImages[7].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-            </div>
-          </div>
-          <div className="col-span-2 group relative overflow-hidden cursor-pointer" onClick={() => setLightbox(allImages[8])}>
-            <img src={allImages[8].src} alt={allImages[8].alt} className="transition-transform duration-700 group-hover:scale-105" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.6) contrast(1.1)' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0)', transition: 'background 0.4s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="group-hover:!bg-[rgba(10,10,10,0.4)]">
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} style={{ opacity: 0, transition: 'opacity 0.3s', color: 'white' }} className="group-hover:!opacity-100"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-            </div>
-          </div>
+            )
+          })}
         </div>
       </div>
 

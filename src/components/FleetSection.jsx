@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useReveal, useLineReveal, useCountUp, gsap, ScrollTrigger } from '../hooks/useGsap'
-import rentImg1 from '../assets/macchine-rent/macchine-rent-1.webp'
-import rentImg2 from '../assets/macchine-rent/macchine-rent-2.webp'
-import rentImg3 from '../assets/macchine-rent/macchine-rent-3.webp'
-import rentImg4 from '../assets/macchine-rent/macchine-rent-4.webp'
-import rentImg5 from '../assets/macchine-rent/macchine-rent-5.webp'
-import rentImg6 from '../assets/macchine-rent/macchine-rent-6.webp'
+import rentImg1 from '../assets/foto/foto-5.webp'
+import rentImg2 from '../assets/foto/foto-13.webp'
+import rentImg3 from '../assets/foto/foto-7.webp'
+import rentImg4 from '../assets/foto/foto-10.webp'
+import rentImg5 from '../assets/foto/foto-15.webp'
+import rentImg6 from '../assets/foto/foto-12.webp'
 
 const cars = [
   { brand: 'Lamborghini', model: 'Huracán Tecnica', hp: '640', engine: 'V10', slug: 'huracan-tecnica' },

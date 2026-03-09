@@ -1,12 +1,14 @@
-import { useReveal, useLineReveal } from '../hooks/useGsap'
+import { useReveal, useLineReveal, useImageParallax, useGhostParallax } from '../hooks/useGsap'
 import aboutImg from '../assets/foto/foto-1.webp'
 
 export default function About() {
   const revealRef = useReveal('.reveal-up')
   const lineRef = useLineReveal('.reveal-line')
+  const parallaxRef = useImageParallax('.parallax-img')
+  const ghostRef = useGhostParallax('.ghost-text')
 
   return (
-    <section id="chi-siamo" ref={(el) => { revealRef.current = el; lineRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
+    <section id="chi-siamo" ref={(el) => { revealRef.current = el; lineRef.current = el; parallaxRef.current = el; ghostRef.current = el }} style={{ background: 'var(--color-bg)', padding: 'clamp(4rem, 8vh, 6rem) 0' }}>
       <div className="relative" style={{ padding: '0 var(--page-margin)' }}>
 
         {/* Ghost text */}
