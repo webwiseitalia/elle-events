@@ -1,3 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-bg: #0a0a0a;
+  --color-bg-elevated: #0d0d0d;
+  --color-bg-card: #111111;
+  --color-red: #C0202A;
+  --color-red-dark: #8a1620;
+  --color-white: #ffffff;
+  --color-white-60: rgba(255,255,255,0.6);
+  --color-white-30: rgba(255,255,255,0.3);
+  --color-white-12: rgba(255,255,255,0.12);
+  --color-white-06: rgba(255,255,255,0.06);
+  --color-white-03: rgba(255,255,255,0.03);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-data: 'Bebas Neue', Impact, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --grid-gap: clamp(1rem, 2vw, 2rem);
+  --page-margin: clamp(1rem, 2vw, 2rem);
+}
+
+@layer base {
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-red);
+    color: white;
+  }
+
+  ::-webkit-scrollbar { width: 0; display: none; }
+
+  img { display: block; max-width: 100%; }
+
+  a { color: inherit; text-decoration: none; }
+}
+
+/* ═══ GRAIN OVERLAY ═══ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* ═══ CUSTOM CURSOR ═══ */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background: var(--color-white);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.custom-cursor.hover {
+  transform: translate(-50%, -50%) scale(6);
+  opacity: 0.5;
+}
+
+/* ═══ TYPOGRAPHY SYSTEM ═══ */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+.t-display-italic {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.t-data {
+  font-family: var(--font-data);
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+}
+
+.t-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-white-30);
+}
+
+.t-micro {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-white-30);
+}
+
+/* ═══ EDITORIAL RULE ═══ */
+.rule {
+  height: 1px;
+  background: var(--color-white-12);
+  width: 100%;
+}
+
+.rule-red {
+  height: 1px;
+  background: var(--color-red);
+  width: 0%;
+}
+
+/* ═══ VIGNETTE ON IMAGES ═══ */
+.img-vignette {
+  position: relative;
+}
+.img-vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(10,10,10,0.7) 100%);
+  pointer-events: none;
+}
+
+/* ═══ BACKGROUND NUMBER ═══ */
+.bg-number {
+  font-family: var(--font-data);
+  font-size: clamp(200px, 30vw, 500px);
+  line-height: 0.8;
+  color: var(--color-white);
+  opacity: 0.04;
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ═══ GHOST TEXT ═══ */
+.ghost-text {
+  font-family: var(--font-display);
+  font-size: clamp(120px, 20vw, 400px);
+  line-height: 0.85;
+  color: var(--color-white);
+  opacity: 0.04;
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ═══ RED ACCENT ═══ */
+.accent-red {
+  color: var(--color-red);
+}
+
+.accent-red-bg {
+  background-color: var(--color-red);
+}
+
+/* ═══ BUTTON ═══ */
+.btn-editorial {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-white);
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-white-12);
+  transition: border-color 0.4s ease, color 0.4s ease;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.btn-editorial:hover {
+  border-bottom-color: var(--color-red);
+  color: var(--color-red);
+}
+
+.btn-editorial svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-editorial:hover svg {
+  transform: translateX(4px);
+}
+
+.btn-solid {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-white);
+  background: var(--color-red);
+  padding: 0.875rem 2.5rem;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-solid:hover {
+  background: var(--color-red-dark);
+}
+
+/* ═══ REVEAL ANIMATIONS (GSAP targets) ═══ */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal-line {
+  width: 0%;
+}
+
+.char-reveal .char {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* ═══ RESPONSIVE GRID HELPERS ═══ */
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+  width: 100%;
+  padding: 0 var(--page-margin);
+}
+
+@media (max-width: 768px) {
+  .editorial-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
