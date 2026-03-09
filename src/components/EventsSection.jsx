@@ -68,10 +68,10 @@ export default function EventsSection() {
         <div className="ghost-text" style={{ top: '-8%', right: '-5%' }}>EVENTS</div>
 
         {/* Section label */}
-        <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)' }}>[ 02 — Prossimo Evento ]</div>
+        <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)', textAlign: 'right' }}>[ 02 — Prossimo Evento ]</div>
 
         {/* Giant overlapping title */}
-        <div className="reveal-up" style={{ position: 'relative', zIndex: 2, marginBottom: '-4vw' }}>
+        <div className="reveal-up" style={{ position: 'relative', zIndex: 2, marginBottom: '-4vw', textAlign: 'right' }}>
           <h2 className="t-display" style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.85' }}>
             {nextEvent.name}
           </h2>

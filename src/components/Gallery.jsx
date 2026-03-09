@@ -43,10 +43,10 @@ export default function Gallery() {
         <div className="ghost-text" style={{ bottom: '10%', left: '-5%' }}>GALLERY</div>
 
         {/* Section label */}
-        <div className="reveal-up t-label mb-4" style={{ color: 'var(--color-red)' }}>[ 04 — Gallery ]</div>
+        <div className="reveal-up t-label mb-4" style={{ color: 'var(--color-red)', textAlign: 'center' }}>[ 04 — Gallery ]</div>
 
         {/* Giant overlapping title */}
-        <div className="flex flex-wrap items-end justify-between gap-4" style={{ position: 'relative', zIndex: 2, marginBottom: '-3vw' }}>
+        <div className="flex flex-wrap items-end justify-center gap-6" style={{ position: 'relative', zIndex: 2, marginBottom: '-3vw' }}>
           <h2 className="reveal-up t-display" style={{ fontSize: 'clamp(3.5rem, 8vw, 8rem)', lineHeight: '0.9' }}>
             Momenti <em className="t-display-italic" style={{ color: 'var(--color-red)' }}>esclusivi</em>
           </h2>

@@ -15,10 +15,10 @@ export default function About() {
         <div className="ghost-text" style={{ top: '-10%', left: '-5%' }}>ABOUT</div>
 
         {/* Section label */}
-        <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)' }}>[ 01 — Chi Siamo ]</div>
+        <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)', textAlign: 'center' }}>[ 01 — Chi Siamo ]</div>
 
         {/* Giant title */}
-        <div className="reveal-up" style={{ marginBottom: 'clamp(1rem, 2vw, 1.5rem)' }}>
+        <div className="reveal-up" style={{ marginBottom: 'clamp(1rem, 2vw, 1.5rem)', textAlign: 'center' }}>
           <h2 className="t-display" style={{ fontSize: 'clamp(3.5rem, 8vw, 8rem)', lineHeight: '0.9' }}>
             <span style={{ display: 'block' }}>Dove il lusso</span>
             <span style={{ display: 'block' }}>incontra <em className="t-display-italic" style={{ color: 'var(--color-red)' }}>l'adrenalina</em></span>

@@ -130,7 +130,7 @@ export default function FleetSection() {
         <div className="reveal-line rule" style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)' }} />
 
         {/* Rent title */}
-        <div className="reveal-up" style={{ marginBottom: 'clamp(1rem, 2vw, 1.5rem)' }}>
+        <div className="reveal-up" style={{ marginBottom: 'clamp(1rem, 2vw, 1.5rem)', textAlign: 'center' }}>
           <span className="t-label" style={{ color: 'var(--color-red)', display: 'block', marginBottom: '0.75rem' }}>Rent</span>
           <h3 className="t-display" style={{ fontSize: 'clamp(3rem, 7vw, 7rem)', lineHeight: '0.9' }}>
             Noleggia una{' '}

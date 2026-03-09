@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGhostParallax } from '../hooks/useGsap'
-import logo from '../assets/logoelleevents.webp'
 import heroBg from '../assets/macchine-rent/macchine-rent-6.webp'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -44,17 +43,14 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10" style={{ padding: '0 var(--page-margin)', paddingBottom: 'clamp(3rem, 8vh, 6rem)' }}>
-        <div className="absolute top-0 left-0 right-0 flex items-center justify-between" style={{ padding: 'clamp(6rem, 12vh, 10rem) var(--page-margin) 0' }}>
-          <div className="hero-reveal">
-            <img src={logo} alt="Elle Events" className="w-14 h-14 md:w-16 md:h-16 rounded-full" style={{ opacity: 0.9 }} />
-          </div>
+        <div className="absolute top-0 left-0 right-0 flex items-center justify-end" style={{ padding: 'clamp(6rem, 12vh, 10rem) var(--page-margin) 0' }}>
           <div className="hero-reveal t-micro hidden md:block">↓ [ Scroll ]</div>
         </div>
 
         <div>
           <div className="hero-reveal t-label mb-4" style={{ color: 'var(--color-red)' }}>Supercar Society — Torino, IT</div>
           <h1 className="hero-reveal t-display" style={{ fontSize: 'clamp(3rem, 9vw, 7.5rem)', marginBottom: '0.5em' }}>
-            <span style={{ display: 'block' }}>Unconventional</span>
+            <span style={{ display: 'block' }}>ELLE group</span>
             <span style={{ display: 'block' }}><em className="t-display-italic" style={{ fontSize: '0.85em' }}>events</em></span>
           </h1>
           <div className="hero-line rule" style={{ marginBottom: '1.5rem' }} />

@@ -19,10 +19,10 @@ export default function Contact() {
 
         <div className="ghost-text" style={{ top: '-5%', right: '-8%' }}>CONTACT</div>
 
-        <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)' }}>[ 06 — Contatti ]</div>
+        <div className="reveal-up t-label mb-6" style={{ color: 'var(--color-red)', textAlign: 'right' }}>[ 06 — Contatti ]</div>
 
         {/* Giant title */}
-        <div className="reveal-up" style={{ marginBottom: 'clamp(1rem, 2vw, 1.5rem)' }}>
+        <div className="reveal-up" style={{ marginBottom: 'clamp(1rem, 2vw, 1.5rem)', textAlign: 'right' }}>
           <h2 className="t-display" style={{ fontSize: 'clamp(3.5rem, 8vw, 8rem)', lineHeight: '0.9' }}>
             Resta in <em className="t-display-italic" style={{ color: 'var(--color-red)' }}>contatto</em>
           </h2>

@@ -215,11 +215,11 @@ export default function CarPage() {
             alt={`${car.brand} ${car.model} wireframe blueprint`}
             style={{
               width: '100%',
-              maxHeight: car.wireframeVertical ? 'none' : '85vh',
+              maxHeight: car.wireframeVertical ? 'none' : '60vh',
               objectFit: 'contain',
               ...(car.wireframeVertical
-                ? { transform: 'rotate(90deg) scale(1.15)', transformOrigin: 'center center', margin: 'clamp(-2rem, -4vw, -4rem) 0' }
-                : { transform: 'scale(1.05)', transformOrigin: 'center center' }
+                ? { transform: 'rotate(90deg) scale(0.85)', transformOrigin: 'center center', margin: 'clamp(-3rem, -6vw, -6rem) 0' }
+                : { transform: 'none', transformOrigin: 'center center' }
               ),
             }}
           />
